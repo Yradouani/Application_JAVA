@@ -11,6 +11,7 @@ import utile.Graphique;
 
 @SuppressWarnings("serial")
 public class PagePrincipale extends JPanel{
+	private JButton 	btnEmployes		= new JButton("Employés");
 	private JButton 	btnClients		= new JButton("Clients");
 	private JButton 	btnProduits		= new JButton("Produits");
 	private JButton 	btnVentes		= new JButton("Ventes");
@@ -39,6 +40,7 @@ public class PagePrincipale extends JPanel{
 
 		// Ajout des composants
 		c.insets = new Insets(0, 3, 0, 3);
+		panel.add(btnEmployes,c);
 		panel.add(btnClients,c);
 		panel.add(btnProduits,c);
 		panel.add(btnVentes,c);
@@ -46,6 +48,14 @@ public class PagePrincipale extends JPanel{
 
 		return panel;
 
+	}
+
+	public JButton getBtnEmployes() {
+		return btnEmployes;
+	}
+
+	public void setBtnEmployes(JButton btnEmployes) {
+		this.btnEmployes = btnEmployes;
 	}
 
 	public JButton getBtnClients() {

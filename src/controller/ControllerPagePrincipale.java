@@ -17,13 +17,12 @@ public class ControllerPagePrincipale {
 
 	public JPanel getMenu() {
 
-		this.conteneurPrincipal = conteneurPrincipal;
 
 		// Création du contenu du menu client
 		pagePrincipale = new PagePrincipale();
 
 		addListener(pagePrincipale.getBtnClients(), pagePrincipale.getBtnProduits(), pagePrincipale.getBtnVentes(),
-				pagePrincipale.getBtnFactures());
+				pagePrincipale.getBtnFactures(), pagePrincipale.getBtnEmployes());
 		// Remplissage des champs de texte avec le premier client de la BDD
 //		remplissageChampsClient(false);
 
@@ -32,8 +31,16 @@ public class ControllerPagePrincipale {
 
 	}
 
-	private void addListener(JButton btnClients, JButton btnProduits, JButton btnVentes, JButton btnFactures) {
+	private void addListener(JButton btnClients, JButton btnProduits, JButton btnVentes, JButton btnFactures, JButton btnEmployes) {
 		
+		btnEmployes.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				actionBtnListeEmployes();
+
+			}
+		});
 		btnClients.addActionListener(new ActionListener() {
 
 			@Override
@@ -69,14 +76,13 @@ public class ControllerPagePrincipale {
 
 	}
 
-	private void actionBtnDeconnection() {
-		ControllerPrincipal controllerPrincipal;
-		
+	private void actionBtnListeEmployes() {
+		new ControllerListeDesEmployes().getListeDesEmployes();
 	}
+	
 	private void actionBtnListeClients() {
 		new ControllerListeDesClients().getListeDesClients();
 	}
-
 		
 
 	private void actionBtnProduits() {

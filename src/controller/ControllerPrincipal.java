@@ -73,30 +73,6 @@ public class ControllerPrincipal {
 
 			}
 		});
-//		btnProduits.addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				actionBtnProduits();
-//
-//			}
-//		});
-//		btnVentes.addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				actionBtnVentes();
-//
-//			}
-//		});
-//		btnFactures.addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				actionBtnFactures();
-//
-//			}
-//		});
 
 	}
 

@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -19,20 +20,16 @@ import utile.Graphique;
 import vue.ListeDesDonnees;
 
 public class ControllerListeDesClients {
-
-	ControllerPrincipal controllerPrincipal = new ControllerPrincipal();
-	String isAdmin = controllerPrincipal.getIsAdmin();
 	public void getMenu() {
 
 		getListeDesClients();
-		System.out.println("IsAdmin"+isAdmin);
-
 
 	}
-
+	
+	
 	public void getListeDesClients() {
 
-		ListeDesDonnees listeDesClients = new ListeDesDonnees("Liste des clients");
+		ListeDesDonnees listeDesClients = new ListeDesDonnees("Liste des client");
 		listeDesClients.setVisible(true);
 
 		// Récupération du conteneur de la fenêtre
@@ -47,7 +44,7 @@ public class ControllerListeDesClients {
 		GridBagConstraints c = new GridBagConstraints();
 
 		Graphique.setMyConstraints(c, 0, 0, GridBagConstraints.CENTER, new Insets(5, 0, 10, 10));
-		conteneurScrollable.add(new JLabel("Identifiant"), c);
+		conteneurScrollable.add(new JLabel("Id Client"), c);
 
 		Graphique.setMyConstraints(c, 1, 0, GridBagConstraints.CENTER, new Insets(5, 0, 10, 10));
 		conteneurScrollable.add(new JLabel("Nom"), c);
@@ -59,17 +56,23 @@ public class ControllerListeDesClients {
 		conteneurScrollable.add(new JLabel("Adresse"), c);
 
 		Graphique.setMyConstraints(c, 4, 0, GridBagConstraints.CENTER, new Insets(5, 0, 10, 10));
-		conteneurScrollable.add(new JLabel("Code postal"), c);
-
+		conteneurScrollable.add(new JLabel("Code Postal"), c);
+		
 		Graphique.setMyConstraints(c, 5, 0, GridBagConstraints.CENTER, new Insets(5, 0, 10, 10));
 		conteneurScrollable.add(new JLabel("Ville"), c);
-
+		
 		Graphique.setMyConstraints(c, 6, 0, GridBagConstraints.CENTER, new Insets(5, 0, 10, 10));
-		conteneurScrollable.add(new JLabel("Mail"), c);
+		conteneurScrollable.add(new JLabel("E-mail"), c);
+		
+		Graphique.setMyConstraints(c, 7, 0, GridBagConstraints.CENTER, new Insets(5, 0, 10, 10));
+		conteneurScrollable.add(new JLabel("Numéro de téléphone"), c);
+		
+		Graphique.setMyConstraints(c, 8, 0, GridBagConstraints.CENTER, new Insets(5, 0, 10, 10));
+		conteneurScrollable.add(new JLabel("Total des achats"), c);
 
 		Graphique.setMyConstraints(c, 0, 1, GridBagConstraints.CENTER, new Insets(0, 0, 0, 0));
 		c.fill = GridBagConstraints.HORIZONTAL; // remplit toute la largeur de la cellule
-		c.gridwidth = 8; // prend 8 cellules de large
+		c.gridwidth = 12; // prend 8 cellules de large
 		JSeparator s = new JSeparator();
 		s.setBackground(Color.BLACK);
 		conteneurScrollable.add(s, c);
@@ -79,25 +82,27 @@ public class ControllerListeDesClients {
 		// Ouvrir une connexion à la base de donnée pour récupérer les informations
 		// client
 		try (Connection connection = new Connexion().getConnection()) {
-			String requete = "SELECT * FROM employe;";
+			String requete = "SELECT * FROM client;";
 			try (Statement statement = connection.createStatement()) {
 				try (ResultSet resultSet = statement.executeQuery(requete)) {
 					int ligneEcriture = 1;
 					while (resultSet.next()) { // tant qu'il y a un élément dans mon resultSet
 
 						// Récupération des valeurs dans le résultat de la requête
-						String identifiant = resultSet.getString("ID_EMPLOYE");
+						String id = resultSet.getString("ID_CLIENT");
 						String nom = resultSet.getString("NOM");
 						String prenom = resultSet.getString("PRENOM");
 						String adresse = resultSet.getString("ADRESSE");
 						String codePostal = resultSet.getString("CODE_POSTAL");
 						String ville = resultSet.getString("VILLE");
-						String mail = resultSet.getString("EMAIL");
+						String email = resultSet.getString("EMAIL");
+						String numeroTelephone = resultSet.getString("NUMERO_TELEPHONE");
+						String totalAchat = resultSet.getString("TOTAL_ACHAT") + "$";
 
 						// Ajout des valeurs au conteneur pour affichage
 						Graphique.setMyConstraints(c, 0, ligneEcriture + 1, GridBagConstraints.WEST,
 								new Insets(5, 0, 5, 10));
-						conteneurScrollable.add(new JLabel(identifiant), c);
+						conteneurScrollable.add(new JLabel(id), c);
 
 						Graphique.setMyConstraints(c, 1, ligneEcriture + 1, GridBagConstraints.WEST,
 								new Insets(5, 0, 5, 10));
@@ -114,20 +119,32 @@ public class ControllerListeDesClients {
 						Graphique.setMyConstraints(c, 4, ligneEcriture + 1, GridBagConstraints.WEST,
 								new Insets(5, 0, 5, 10));
 						conteneurScrollable.add(new JLabel(codePostal), c);
-
+						
 						Graphique.setMyConstraints(c, 5, ligneEcriture + 1, GridBagConstraints.WEST,
 								new Insets(5, 0, 5, 10));
 						conteneurScrollable.add(new JLabel(ville), c);
-
+						
 						Graphique.setMyConstraints(c, 6, ligneEcriture + 1, GridBagConstraints.WEST,
 								new Insets(5, 0, 5, 10));
-						conteneurScrollable.add(new JLabel(mail), c);
+						conteneurScrollable.add(new JLabel(email), c);
 						
-						if( isAdmin == "1") {
-							Graphique.setMyConstraints(c, 7, ligneEcriture + 1, GridBagConstraints.WEST,
+						Graphique.setMyConstraints(c, 7, ligneEcriture + 1, GridBagConstraints.WEST,
+								new Insets(5, 0, 5, 10));
+						conteneurScrollable.add(new JLabel(numeroTelephone), c);
+						
+						Graphique.setMyConstraints(c, 8, ligneEcriture + 1, GridBagConstraints.WEST,
+								new Insets(5, 0, 5, 10));
+						conteneurScrollable.add(new JLabel(totalAchat), c);
+						
+//						if( isAdmin == "1") {
+							Graphique.setMyConstraints(c, 9, ligneEcriture + 1, GridBagConstraints.WEST,
 									new Insets(5, 0, 5, 10));
-							conteneurScrollable.add(new JLabel("supprimer"), c);
-						}
+							conteneurScrollable.add(new JButton("supprimer"), c);
+//						} yasmine.radouani@yahoo.fr
+							
+							Graphique.setMyConstraints(c, 10, ligneEcriture + 1, GridBagConstraints.WEST,
+									new Insets(5, 0, 5, 10));
+							conteneurScrollable.add(new JButton("modifier"), c);
 
 						ligneEcriture += 1;
 					}

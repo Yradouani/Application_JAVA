@@ -18,7 +18,7 @@ public class ListeDesDonnees extends JFrame{
 
 			// Propriétés de la fenêtre
 			super(nomFenetre); 											// appel au constructeur de la classe parente en précisant le titre de la fenêtre
-			this.setSize(900,450); 										// taille de la fenêtre en pixels
+			this.setSize(1200,750); 										// taille de la fenêtre en pixels
 			this.setLocationRelativeTo(null);							// faire apparaître la fenêtre centrée par rapport à l'écran
 			this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 	// action à la fermeture de la fenêtre
 
