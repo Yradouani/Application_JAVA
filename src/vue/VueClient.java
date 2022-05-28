@@ -31,6 +31,7 @@ public class VueClient extends JPanel {
 	private JTextField 	txtVille 			= new JTextField(40);
 	private JTextField 	txtMail 			= new JTextField(40);
 	
+	private JButton		btnNouveauClient = new JButton("Ajouter un nouveau client");
 	private JButton 	btnPrecedent		= new JButton("Précédent");
 	
 	public VueClient() {
@@ -204,6 +205,13 @@ public class VueClient extends JPanel {
 
 		public void setBtnPrecedent(JButton btnPrecedent) {
 			this.btnPrecedent = btnPrecedent;
+		}
+		public JButton getBtnNouveauClient() {
+			return btnNouveauClient;
+		}
+
+		public void setBtnNouveauClient(JButton btnNouveauClient) {
+			this.btnNouveauClient = btnNouveauClient;
 		}
 
 	

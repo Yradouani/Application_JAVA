@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import vue.MenuSuperieur;
 import vue.PagePrincipale;
 
-public class ControllerPagePrincipale {
+public class ControllerPagePrincipale{
 
 	private JPanel conteneurPrincipal;
 	PagePrincipale pagePrincipale;
@@ -20,6 +20,9 @@ public class ControllerPagePrincipale {
 
 		// Création du contenu du menu client
 		pagePrincipale = new PagePrincipale();
+		
+//		System.out.println(isAdminResult);
+		
 
 		addListener(pagePrincipale.getBtnClients(), pagePrincipale.getBtnProduits(), pagePrincipale.getBtnVentes(),
 				pagePrincipale.getBtnFactures(), pagePrincipale.getBtnEmployes());
@@ -93,14 +96,14 @@ public class ControllerPagePrincipale {
 	private void actionBtnVentes() {
 
 		// Remplacer le menu affiché par le menu de gestion des produits
-		updateFrame(new ControllerVente().getMenu());
+		new ControllerListeDesVentes().getListeDesVentes();
 
 	}
 
 	private void actionBtnFactures() {
 
 		// Remplacer le menu affiché par le menu de gestion des produits
-		updateFrame(new ControllerFacture().getMenu());
+		new ControllerListeDesFactures().getListeDesFactures();
 
 	}
 

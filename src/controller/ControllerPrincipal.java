@@ -18,7 +18,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import persistence.Connexion;
 import vue.FenetrePrincipale;
@@ -31,9 +30,8 @@ public class ControllerPrincipal {
 	private static final String OUTPUT_FORMAT = "%-20s:%s";
 	private FenetrePrincipale fenetrePrincipale;
 	
-	public String isAdmin;
-	public String isAdminResult;
-
+	private int isAdmin;
+	private static int isAdminResult;
 	// --------------------
 	// Méthodes d'instance
 	// --------------------
@@ -81,6 +79,7 @@ public class ControllerPrincipal {
 //		Récupération de l'email et du mot de passe saisi par l'utilisateur
 		String email = fenetrePrincipale.getLogin().getTxtEmail().getText();
 		String password = fenetrePrincipale.getLogin().getTxtPassword().getText();
+		
 		String sel = "sfghjk,nb7412368++=41";
 
 		String passwordSel = password + sel;
@@ -108,7 +107,7 @@ public class ControllerPrincipal {
 						// Récupération des valeurs dans le résultat de la requête
 						String emailClient = resultSet.getString("EMAIL");
 						String motdepasse = resultSet.getString("MOTDEPASSE");
-						isAdmin = resultSet.getString("ISADMIN");
+						isAdmin = resultSet.getInt("ISADMIN");
 
 						myArrayListEmail.add(emailClient);
 						myArrayListPassword.add(motdepasse);
@@ -129,6 +128,15 @@ public class ControllerPrincipal {
 				if (isEmail && isPassword) {
 					System.out.println("je suis"+isAdmin);
 					isAdminResult = isAdmin;
+					System.out.println(isAdminResult);
+					getIsAdmin();
+					if(isAdmin == 1) {
+						System.out.println("Je suis admin");
+					}else {
+						System.out.println("je ne suis pas admin");
+					}
+//					yasmine.radouani@yahoo.fr
+					
 					updateFrame(new ControllerPagePrincipale().getMenu());
 				} else {
 					JFrame jFrame = new JFrame();
@@ -145,33 +153,6 @@ public class ControllerPrincipal {
 	private void actionBtnDeconnection() {
 		updateFrame(new ControllerPrincipal().getMenu());
 	}
-//	private void actionBtnClients() {
-//
-//		// Remplacer le menu affiché par le menu de gestion des produits
-//		updateFrame(new ControllerClient().getMenu());
-//
-//	}
-//
-//	private void actionBtnProduits() {
-//
-//		// Remplacer le menu affiché par le menu de gestion des produits
-//		updateFrame(new ControllerProduit().getMenu());
-//
-//	}
-//
-//	private void actionBtnVentes() {
-//
-//		// Remplacer le menu affiché par le menu de gestion des produits
-//		updateFrame(new ControllerVente().getMenu());
-//
-//	}
-//
-//	private void actionBtnFactures() {
-//
-//		// Remplacer le menu affiché par le menu de gestion des produits
-//		updateFrame(new ControllerFacture().getMenu());
-//
-//	}
 
 	private void updateFrame(JPanel panel) {
 
@@ -209,9 +190,10 @@ public class ControllerPrincipal {
         return sb.toString();
     }
 
-	public String getIsAdmin() {
-		System.out.println("Je retourne que je suis admin"+isAdmin);
-		return isAdmin;
+	public int getIsAdmin() {
+		System.out.println("Je retourne dans controllerPrincipal que je suis admin "+isAdminResult);
+		return isAdminResult;
 	}
+	
 
 }

@@ -20,7 +20,8 @@ import utile.Graphique;
 import vue.ListeDesDonnees;
 
 public class ControllerListeDesProduits {
-	
+	ControllerPrincipal controllerPrincipal = new ControllerPrincipal();
+	int isAdmin = controllerPrincipal.getIsAdmin();
 	public void getMenu() {
 
 		getListeDesProduits();
@@ -105,18 +106,23 @@ public class ControllerListeDesProduits {
 								new Insets(5, 0, 5, 10));
 						conteneurScrollable.add(new JLabel(quantite), c);
 						
-//						if( isAdmin == "1") {
+						if( isAdmin == 1) {
 							Graphique.setMyConstraints(c, 5, ligneEcriture + 1, GridBagConstraints.WEST,
 									new Insets(5, 0, 5, 10));
 							conteneurScrollable.add(new JButton("supprimer"), c);
-//						} yasmine.radouani@yahoo.fr
 							
 							Graphique.setMyConstraints(c, 6, ligneEcriture + 1, GridBagConstraints.WEST,
 									new Insets(5, 0, 5, 10));
 							conteneurScrollable.add(new JButton("modifier"), c);
+						} 
+//							yasmine.radouani@yahoo.fr
+							
 
 						ligneEcriture += 1;
 					}
+					Graphique.setMyConstraints(c, 1, ligneEcriture + 1, GridBagConstraints.WEST,
+							new Insets(5, 0, 5, 10));
+					conteneurScrollable.add(new JButton("Ajouter un nouveau produit"), c);
 				}
 			}
 		} catch (SQLException e) {

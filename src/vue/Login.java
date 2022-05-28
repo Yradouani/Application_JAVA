@@ -3,12 +3,14 @@ package vue;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import utile.Graphique;
@@ -16,11 +18,12 @@ import utile.Graphique;
 @SuppressWarnings("serial")
 public class Login extends JPanel {
 
+	private static final String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
 	private JLabel lblEmail = new JLabel("E-mail");
 	private JLabel lblPassword = new JLabel("Password");
 
 	private JTextField txtEmail = new JTextField(15);
-	private JTextField txtPassword = new JTextField(40);
+	private JPasswordField txtPassword = new JPasswordField(40);
 
 	private JButton btnConnection = new JButton("Connection");
 	
@@ -118,7 +121,7 @@ public class Login extends JPanel {
 		return txtPassword;
 	}
 
-	public void setTxtPassword(JTextField txtPassword) {
+	public void setTxtPassword(JPasswordField txtPassword) {
 		this.txtPassword = txtPassword;
 	}
 }
